@@ -1,26 +1,43 @@
 {
-  "manifest_version": 2,
-  "name": "YouTubeTimeShare",
-  "version": "1.0.001",
-  "description": "Creates custom URLs for Youtube videos with starting AND ending times (to make clips).",
-  "browser_action": {
-      "default_icon": "icons/TimeShare_600.png",
-      "default_popup": "index.html"
-   },
-   "commands": {
-      "_execute_browser_action": {
-         "suggested_key": {
-            "windows": "Alt+Y"
-         }
-      }
-   },
-   "content_scripts": [ {
-      "js": [ "js/libs/jquery-2.2.3.min.js", "js/popup_Timeshare.js", "js/libs/alertify.min.js" ],
-      "matches": ["*://*.youtube.com/*","*://*.youtu.be/*"]
-   } ],
-   "icons": {
-      "128": "icons/TimeShare_128.png",
-      "48": "icons/TimeShare_48.png"
-   },
-   "permissions": [ "activeTab" ]
+    "manifest_version": 2,
+    "name": "YouTubeTimeShare",
+    "version": "1.0.001",
+    "description": "Creates custom URLs for Youtube videos with starting AND ending times (to make clips).",
+    "homepage_url": "https://github.com/genBTC/YouTubeTimeShare",
+    "author": "genBTC (genBTC@gmx.com)",
+    "browser_action": {
+        "default_icon": "icons/TimeShare_600.png",
+        "default_title": "YouTubeTimeShare",
+        "default_popup": "index.html"
+    },
+    "commands": {
+        "_execute_browser_action": {
+            "suggested_key": {
+                "windows": "Alt+Y"
+            }
+        }
+    },
+    "background": {
+        "persistent": true,
+        "scripts": [
+            "js/libs/jquery-2.2.3.min.js",
+            "js/libs/alertify.min.js",
+            "js/popup_timeshare.js"
+        ],
+      "matches": ["*://*.youtube.com/*", "*://*.youtu.be/*"]
+    },
+    "content_scripts": [ {
+      "js": [ "js/content.js" ],
+      "matches": ["*://*.youtube.com/*", "*://*.youtu.be/*"],
+      "exclude_matches": [ "*://www.youtube.com/live_chat*", "*://www.youtube.com/tv*" ]
+    }],  
+    "icons":{
+		"128": "icons/TimeShare_128.png",
+	    "48": "icons/TimeShare_48.png"
+	},
+    "permissions": [
+		"activeTab",
+		"*://*.youtube.com/*", 
+		"*://*.youtu.be/*"
+	]
 }
